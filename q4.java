@@ -41,7 +41,14 @@ public class q4 {
         return b1.equals(b2);
     }
 
-    public static boolean areEqualGeneric(){
-        return true;
+    public static <T, U> boolean areEqualGeneric(T first, U second){
+
+        if (first.equals(second)){
+            return true;
+        }
+        else{
+            return false;
+        }
+    
     }
 }
