@@ -92,6 +92,7 @@ class Match {
 }
 
 public class q5 {
+//Main for the class
     public static void main(String[] args) {
         House h1 = new House("h1");
         House h2 = new House("h2");
