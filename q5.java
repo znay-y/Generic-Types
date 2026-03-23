@@ -21,6 +21,7 @@ interface Compatibility<U> {
     public boolean compatible(U u);
 
     public U[] preferences();
+
 }
 
 class House {
@@ -33,6 +34,7 @@ class House {
     public String toString() {
         return name;
     }
+
 }
 
 class Client implements Compatibility<House> {
@@ -46,6 +48,7 @@ class Client implements Compatibility<House> {
     public String toString() {
         return name;
     }
+
 
     // Add h to the list of houses this client would
     // like to buy.
@@ -88,11 +91,78 @@ class Match {
     // and their objects of preference of type U.
     public static <U, T extends Compatibility<U>> Pair<T, U>[] match(T[] ts) {
 
+        Pair[] likePairs = new Pair[ts.length];
+        House[] hArray = new House[0];
+        int foundIndex = 0;
+        boolean clash = false;
+        // go thought clients
+        for (int i = 0; i < ts.length; i++) {
+
+            U[] Uarray = ts[i].preferences();
+           
+            // go through THEIR houses
+            for (int j = 0; j < Uarray.length; j++) {
+                String client = ts[i].toString();
+                ;
+                System.out.println("\n" + client + " likes " + house);
+
+                if (searchArray(hArray, house) == false) {
+                    foundHouses = arrayExtend(foundHouses);
+                    foundHouses[foundIndex] = house;
+                    foundIndex++;
+                } else {
+                    System.out.println(house + " has been found already");
+                    // Find where clash is and swap
+                }
+                System.out.println("\nJ value: " + j);
+                System.out.println("\nI value: " + i);
+
+                if (i == 0) {
+                    likePairs[i] = new Pair(ts[i], Uarray[j]);
+                    continue;
+
+                } else if () {
+                    System.out.println("ok");
+                }
+
+            }
+        }
+        arrayprint(foundHouses);
+
+        return likePairs;
+    }
+
+    public static String[] arrayExtend(String[] sArray) {
+        int len = sArray.length;
+        String[] NewS = new String[len + 1];
+        for (int i = 0; i < len; i++) {
+            NewS[i] = sArray[i];
+        }
+        return NewS;
+    }
+
+    public static void arrayprint(String[] sArray) {
+        int len = sArray.length;
+
+        for (int i = 0; i < len; i++) {
+            System.out.println(sArray[i] + "  ");
+        }
+    }
+
+    public static boolean searchArray(House[] hArray, House key) {
+        int len = sArray.length;
+
+        for (int i = 0; i < len; i++) {
+            if (sArray[i].equals(key)) {
+                return true;
+            }
+        }
+        return false;
     }
 }
 
 public class q5 {
-//Main for the class
+    // Main for the class
     public static void main(String[] args) {
         House h1 = new House("h1");
         House h2 = new House("h2");
@@ -108,11 +178,12 @@ public class q5 {
         c3.likes(h3);
 
         Client[] cs = { c1, c2, c3 };
-        for (Pair<Client, House> p : Match.match(cs)) {
-            System.out.print(p.left);
-            System.out.print(" --- ");
-            System.out.println(p.right);
-        }
+        Match.match(cs);
+        //for (Pair<Client, House> p : Match.match(cs)) {
+          //  System.out.print(p.left);
+            //System.out.print(" --- ");
+            //System.out.println(p.right);
+        //}
 
     }
 }
